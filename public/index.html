@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script/index_anime.js" async></script>
+    <script src="script/main.js" async></script>
+    <link rel="stylesheet" href="css/base.css">
+    
+    <style>
+        
+      @keyframes curtain {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        
+        @keyframes wellcome {
+            from {
+                opacity: 1;
+                z-index: 10;
+            }
+            to {
+                opacity: 0;
+                z-index: -10;
+            }
+        }   
+        
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .curtain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-color: #000040;
+            animation-name: curtain;
+            animation-delay: 0ms;
+            animation-duration: 500ms;
+            animation-fill-mode: forwards;
+        }
+        
+        .canvas {
+            position: fixed;
+            z-index: 10;
+            animation-name: wellcome;
+            animation-delay: 2000ms;
+            animation-duration: 1500ms;
+            animation-fill-mode: forwards;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="curtain"></div>
+    
+    <canvas class="canvas"></canvas>
+
+    <header>
+        <a href="index.html" title="回首頁"><img src="images/logo.PNG" id="logo" alt="logo"></a>
+        <p id="sign_box"><span id="greeting"></span><a id="log_out"></a></p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="news.html">滷訊快報</a></li>
+            <li><a href="stores.html">滷店資訊</a></li>
+            <li><a href="items.html">滷品列表</a></li>
+            <li><a href="cart.html">滷味籃子</a></li>
+            <li><a href="member.html" id="member_nav">滷客中心</a></li>
+            <li><a href="qa.html">Q&amp;A</a></li>
+        </ul>
+    </nav>
+
+    <main>
+    
+    
+        <h2>滷訊快報</h2><hr>
+        <ol>
+            <li>
+                <h3><span>2020-10-01</span>蘭姨滷味陪你過補冬，肉肉88折溫暖你口又暖你心</h3>
+                <p>
+                    活動期間:2020-11-06~2020-11-08<br>
+                    活動內容：活動期間肉類全品項88折。
+                </p>
+            </li>
+            <li>
+                <h3><span>2020-10-01</span>重陽登高、插茱萸蘭姨不能少，逢9揪送豬血糕</h3>
+                <p>
+                    活動期間:2020-10-25<br>
+                    活動內容：活動期間結帳金額數字含9就送豬血糕一條。
+                </p>
+            </li>
+            <li>
+                <h3><span>2020-10-01</span>蘭姨滷味慶開幕，整個10月來蘭姨買滷味結帳金額凡滿百現折10元，買越多折越多！</h3>
+                <p>
+                    活動期間:2020-10-01~2020-10-31<br>
+                    活動內容：活動期間結帳金額每滿100元現折10元，滿200元現折20元依此類推。
+                </p>
+            </li>
+        </ol>
+
+    </main>
+
+    <footer>
+        <div>
+            <p>
+                營業時間:上午11:00至下午18:00<br>
+                地址：台北市中正區八德路1段82巷12號<br>
+                電話：0980-010-692<br>
+            </p>
+            <p>Copyright © 蘭姨滷味. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+           
+</body>
+
+</html>    
+    

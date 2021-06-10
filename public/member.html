@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/member.css">
+    <script src="script/main.js" async></script>
+    <script src="script/member.js" async></script>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" title="回首頁"><img src="images/logo.PNG" id="logo" alt="logo"></a>
+        <p id="sign_box"><span id="greeting"></span><a id="log_out"></a></p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="news.html">滷訊快報</a></li>
+            <li><a href="stores.html">滷店資訊</a></li>
+            <li><a href="items.html">滷品列表</a></li>
+            <li><a href="cart.html">滷味籃子</a></li>
+            <li><a href="member.html" id="member_nav">滷客中心</a></li>
+            <li><a href="qa.html">Q&amp;A</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <h2>滷客中心</h2><hr>
+        <div id="form_box">
+            <form action="" method="" id="login_form">
+                <fieldset>
+                    <div class="box__fieldset active_fieldset" id="fieldset_1">
+                        <legend id="legend_1">會員登入</legend>
+                        <div>
+                            <p>
+                                <label for="account_login">帳　　號</label>
+                                <input type="tel" id="account_login" name="account" placehoder="手機號碼:09XXXXXXXX">
+                            </p>
+                            <p>
+                                <label for="password_login">密　　碼</label>
+                                <input type="password" id="password_login" name="password">
+                            </p>
+                            <button type="submit">登入</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <form action="" method="" id="forgot_password_form">
+                <fieldset>
+                    <div class="box__fieldset" id="fieldset_2">            
+                        <legend id="legend_2">忘記密碼</legend>
+                        <div>
+                            <p>
+                                <label for="account_forgot">帳　　號</label>
+                                <input type="tel" id="account_forgot" name="account">
+                            </p>
+                            <p>
+                                <label for="email_forgot">E-mail</label>
+                                <input type="email" id="email__forgot_password" name="email" placeholder="請輸入註冊時電子信箱">
+                            </p>
+                            <button type="submit">確認</button>
+                        </div> 
+                    </div>
+                </fieldset>
+            </form>
+            <form action="" method="" id="forgot_account_form">
+                <fieldset>
+                <div class="box__fieldset" id="fieldset_3"> 
+                    <legend id="legend_3">忘記帳號</legend>
+                    <div>
+                        <p>
+                            <label for="id_forgot">身分證字號</label>
+                            <input type="text" id="id_forgot" name="id">
+                        </p>
+                        <p>
+                            <label for="email_forgot2">E-mail</label>
+                            <input type="email" id="email__forgot_account" name="email" placeholder="請輸入註冊時電子信箱">
+                        </p>
+                        <button type="submit">確認</button>
+                    </div>
+                </div>
+                </fieldset>
+            </form>
+            <form action="/member_register" method="post" id="register_form">
+                <fieldset>
+                    <div class="box__fieldset" id="fieldset_4">
+                        <legend id="legend_4">加入會員</legend>
+                        <div>
+                            <p>
+                                <label for="account">手機號碼<br>(登入帳號)</label>
+                                <input type="tel" id="account" name="account" placeholder="09********" pattern="09[0-9]{8}" required>
+                            </p>
+                            <p>
+                                <label for="password">輸入密碼</label>
+                                <input type="password" id="password" name="password" placeholder="請輸入4到8個字元" minlength="4" maxlength="8" required>
+                            </p>
+                            <p>
+                                <label for="password_again">確認密碼</label>
+                                <input type="password" id="password_again" name="password_again" placeholder="請再次輸入密碼" required>
+                            </p>
+                            <p>
+                                <label for="name">姓　　名</label>
+                                <input type="text" id="name" name="name" required>
+                            </p>
+                            <ul>
+                                    <li>性　　別</li>
+                                    <li>
+                                        <label for="gender_M">男</label>
+                                        <input type="radio" id="gender_M" name="gender" value="M" required>
+                                    </li>
+                                    <li>
+                                        <label for="gender_F">女</label>
+                                        <input type="radio" id="gender_F" name="gender" value="F">
+                                    </li>
+                            </ul>
+                            <p>
+                                <label for="birthday">生　　日</label>
+                                <input type="date" id="birthday" name="birthday" required>
+                            </p>
+                            <p>
+                                <label for="id">身分證字號</label>
+                                <input type="text" id="id" name="id" pattern="[a-zA-Z]{1}[0-9]{9}" required>
+                            </p>
+                            <p>
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required>
+                            </p>
+                            <label for="getting_ad" class="check_right">
+                                <input type="checkbox" id="getting_ad" name="getting_ad" value="agree" required>
+                                我願意收到蘭姨滷味優惠資訊
+                            </label><br>
+                            <label for="privacy"  class="check_right">
+                                <input type="checkbox" id="privacy" name="privacy" value="agree" required>
+                                我已詳細閱讀並同意<a href="/privacy.html" target="_blank">隱私權政策</a>
+                            </label><br>
+                            <button type="submit">提交</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p>
+                營業時間:上午11:00至下午18:00<br>
+                地址：台北市中正區八德路1段82巷12號<br>
+                電話：0980-010-692<br>
+            </p>
+            <p>Copyright © 蘭姨滷味. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

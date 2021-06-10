@@ -1,0 +1,49 @@
+main div {
+    width:70%;
+    min-width: 300px;
+    height: 400px;
+    padding: 20px;
+    position: relative;
+    margin: 0vw 20vw;
+    background-image: linear-gradient(45deg, var(--logo_color), white 15%, white 85%, var(--logo_color));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+main table {
+    width: 60%;
+    table-layout: fixed;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+main table caption {
+    position: absolute;
+    top: 0px;
+    left: -100px;
+    min-width: 100px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: var(--logo_color);
+}
+
+
+main table tr {
+    line-height: 50px;
+    font-weight: lighter;
+}
+
+
+main table tr th {
+
+    font-weight: normal;
+}
+
+main table tr td {
+    font-weight: bold;
+    font-size: 150%;
+    text-align: left;
+}
