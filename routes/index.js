@@ -95,11 +95,11 @@ router.post('/member_register', function (req, res, next) {
     let email = req.body.email;
     let account = req.body.account;
     let options = {
-        from: '蘭姨滷味',
+        from: '__會員中心',
         to: email,
-        subject: '蘭姨滷味會員註冊成功，請驗證您的email',
+        subject: '會員註冊成功，請驗證您的email',
         html: 
-        '<form action="http://localhost:3000/email_check" method="post"><h1>歡迎加入蘭姨滷味滷客！</h1><p>親愛的滷客您好：</p><br><p>請點擊下方確認按鈕，以完成email驗證及啟用會員帳號，謝謝您！</p><input type="hidden" name="account" value='+ account +'><button type="submit" style="background-color: blue; color: white; width: 100px; line-height: 30px; font-size: 25px;">確認</button></form>'
+        '<form action="http://localhost:3000/email_check" method="post"><h1>歡迎加入會員！</h1><p>親愛的會員您好：</p><br><p>請點擊下方確認按鈕，以完成email驗證及啟用會員帳號，謝謝您！</p><input type="hidden" name="account" value='+ account +'><button type="submit" style="background-color: blue; color: white; width: 100px; line-height: 30px; font-size: 25px;">確認</button></form>'
     };
     
     sendEmail(options);
@@ -242,10 +242,10 @@ router.post('/forgot_password', function (req, res, next) {
     let emailEntered = req.body.email;
     
     let options = {
-        from: '蘭姨滷味',
+        from: '__會員中心',
         to: emailEntered,
-        subject: '蘭姨滷味會員密碼重設',
-        html: '<form action="http://localhost:3000/password_reset" method="post"><p>親愛的滷客您好：</p><br><p>請在10分鐘內點擊下方設定密碼按鈕，以完成密碼重設，謝謝您！</p><button type="submit" style="background-color: blue; color: white; width: 140px; line-height: 30px; font-size: 25px;">設定密碼</button></form>'
+        subject: '會員密碼重設',
+        html: '<form action="http://localhost:3000/password_reset" method="post"><p>親愛的會員您好：</p><br><p>請在10分鐘內點擊下方設定密碼按鈕，以完成密碼重設，謝謝您！</p><button type="submit" style="background-color: blue; color: white; width: 140px; line-height: 30px; font-size: 25px;">設定密碼</button></form>'
     };
                             
     sendEmail(options);
@@ -343,11 +343,11 @@ router.post('/forgot_account', function (req, res, next) {
                             console.log(`Member ${emailEntered} forgot his account and passed the check.`);
                             let account = row.account;
                             let options = {
-                                from: '蘭姨滷味',
+                                from: '__會員中心',
                                 to: emailEntered,
-                                subject: '蘭姨滷味會員帳號提醒',
+                                subject: '會員帳號提醒',
                                 html: 
-                                '<p>親愛的滷客您好：</p><br><p>您的會員帳號為 '+ account +' ，謝謝您！</p><br><a href="http://localhost:3000/member.html">蘭姨滷味會員登入</a>'
+                                '<p>親愛的會員您好：</p><br><p>您的會員帳號為 '+ account +' ，謝謝您！</p><br><a href="http://localhost:3000/member.html">會員登入</a>'
                             };
                             sendEmail(options);
                             
