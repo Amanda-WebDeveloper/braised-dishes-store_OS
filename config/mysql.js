@@ -6,7 +6,7 @@ const config = {
     password: '',
     port: '3306',
     ssl: true,
-    database: 'aunt_lan'
+    database: ''
 };
 
 let connPool = mysql.createPool(config);

@@ -13,9 +13,11 @@
       @keyframes curtain {
             from {
                 opacity: 1;
+                z-index: 10;
             }
             to {
                 opacity: 0;
+                z-index: -10;
             }
         }
         
@@ -34,16 +36,17 @@
             margin: 0;
             overflow: hidden;
         }
-        
+
         .curtain {
+            z-index: 10;
             position: fixed;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 1;
             background-color: #000040;
             animation-name: curtain;
             animation-delay: 0ms;
-            animation-duration: 500ms;
+            animation-duration: 1000ms;
             animation-fill-mode: forwards;
         }
         
@@ -67,6 +70,7 @@
     <header>
         <a href="index.html" title="回首頁"><img src="images/logo.PNG" id="logo" alt="logo"></a>
         <p id="sign_box"><span id="greeting"></span><a id="log_out"></a></p>
+        <a id="hamburger_box"><img src="images/hamburger.png" id="hamburger" alt="menu" /></a>
     </header>
 
     <nav>

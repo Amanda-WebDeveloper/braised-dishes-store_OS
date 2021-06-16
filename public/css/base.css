@@ -67,7 +67,7 @@ footer {
     bottom: 0%;
     left: 0%;
     width: 100%;
-    height: 90px;
+    height: 80px;
     background-color: var(--logo_color);
     color: white;
     display: flex;
@@ -84,7 +84,7 @@ header {
     top: 0%;
     left: 0%;
     width: 100%;
-    height: 120px;
+    height: 110px;
     background-color: var(--logo_color);
     display: flex;
     flex-direction: row;
@@ -102,12 +102,12 @@ header {
     align-self: flex-end;
     justify-self: end;
     color: white;
-    margin: 10px;
+    margin-bottom: 10px;
     width: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 #greeting {
@@ -120,15 +120,29 @@ header {
     color: white;
 }
 
+#hamburger_box {
+    width: 40px;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    top: 45px;
+    right: 3vw;
+}
+
+#hamburger {
+    width: 100%;
+    height: 30px;
+}
+
 
 
 main {
     padding-top: 120px;
     padding-bottom: 90px;
     padding-left: 10px;
-    margin-right: calc(10px + 120px + 3vw);
-    width: calc(100vw - 10px - (10px + 120px + 3vw));
-    height: calc(100vh - 90px);
+    margin-right: calc(10px + 110px + 3vw);
+    width: calc(100vw - 10px - (10px + 110px + 3vw));
+    height: calc(100vh - 80px);
     overflow: auto;
 }
 
@@ -139,6 +153,138 @@ main h2 {
     font-size: 25px;
 }
 
+
+
+@media (orientation: portrait) {
+
+    @keyframes open_menu {
+        from {
+            height: 0px;
+        } 
+        to {
+            height: 500px;
+        }
+    }
+
+    @keyframes close_menu {
+        from {
+            height: 500px;
+        }
+        to {
+            height: 0px;
+        }
+    }
+
+
+    #hamburger_box {
+        opacity: 1;
+    }
+
+    main {
+        width: 95vw;
+    }
+
+    #logo {
+        height: 60px;
+    }
+
+    header {
+        height: 80px;
+        justify-content: space-between;
+        padding-right: calc(40px + 3vw);
+    }
+
+    main {
+        padding-top: 80px;
+    }
+
+    nav {
+        top: 80px;
+        height: 0px;
+        overflow: hidden;
+    }
+
+    .nav_active {
+        animation-name: open_menu;
+        animation-delay: 0ms;
+        animation-duration: 1000ms;
+        animation-fill-mode: forwards;
+    }
+
+    .nav_inactive {
+        height: auto;
+        animation-name: close_menu;
+        animation-delay: 0ms;
+        animation-duration: 1000ms;
+        animation-fill-mode: forwards;
+    }
+
+}
+
+
+
+@media (orientation: portrait) and (min-height: 1000px){
+
+    header {
+        height: 110px;
+    }
+
+    #logo {
+        height: 90px;
+    }
+
+    main {
+        padding-top: 120px;
+    }
+
+    nav {
+        top: 100px;
+    }
+
+    #hamburger_box {
+        top: 75px;
+    }
+
+}
+
+
+
+@media (max-height: 500px) {
+
+    header {
+        position: initial;
+    }
+
+    nav {
+        top: 10vh;
+        height: 80vh;
+        overflow: visible;
+        background-color: var(--logo_color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer {
+        position: initial;
+    }
+
+    main {
+        padding-top: 0px;
+        padding-bottom: 50px;
+        padding-left: 10px;
+        margin-right: calc(90px + 3vw);
+        width: calc(100vw - 10px - (10px + 100px + 3vw));
+        height: auto;
+        overflow: visible;
+    }
+
+    nav ul li a {
+        font-size: 20px;
+        width: 100px;
+    }
+
+}
 
 
 

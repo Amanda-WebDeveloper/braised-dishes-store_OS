@@ -49,7 +49,6 @@ router.post('/data',  function (req, res, next) {
     let items = req.body.item;
     let counts = req.body.count;
     let data = {
-        orderDate: req.body.order_date,
         memberName: req.body.member_name,
         memberTel: req.body.member_tel,
         store: req.body.store,
@@ -107,7 +106,7 @@ router.post('/member_register', function (req, res, next) {
     next();
     
 }, function (req, res) {
-    res.sendfile('./routes/member_register.html');
+    res.sendfile('./routes/member_register_success.html');
 
 });
 

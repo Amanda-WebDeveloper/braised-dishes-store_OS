@@ -16,7 +16,8 @@
     <header>
         <a href="index.html" title="回首頁"><img src="images/logo.PNG" id="logo" alt="logo"></a>
         <p id="sign_box"><span id="greeting"></span><a id="log_out"></a></p>
-    
+        <a id="hamburger_box"><img src="images/hamburger.png" id="hamburger" alt="menu" /></a>
+
     </header>
 
     <nav>
@@ -35,7 +36,7 @@
         <h2>滷味籃子</h2><hr>
         <div>
         <form action="/data" method="post" id="order_form">
-            <fieldset form="order_form">
+            <fieldset form="order_form" class="fieldset">
                 <legend>預訂清單</legend>
                 <div id="box__cart_list">
                     <ol id="cart_list">
@@ -49,7 +50,7 @@
                                 <li class="cart_item_content">小計</li>
                             </ul>
                         </li>
-                        <li id="empty_hint">您的滷味籃子是空的，請至滷品列表夾取！</li>
+                        <li id="empty_hint">您的籃子是空的，請至滷品列表夾取！</li>
                     
                     </ol>
                     <p>
@@ -59,7 +60,7 @@
                 </div>
             </fieldset>
 
-            <fieldset form="order_form">
+            <fieldset form="order_form" class="fieldset">
                 <legend>訂單資料</legend>
                 <ul>
                     <li>
@@ -101,7 +102,6 @@
                         <input type="text" id="member_tel" name="member_tel" value="" readonly>
                     </li>
                 </ul>
-                <input type="hidden" id="order_date" name="order_date" value="">
             </fieldset>
         
         </form>        

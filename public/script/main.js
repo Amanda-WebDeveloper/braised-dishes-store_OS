@@ -10,7 +10,7 @@
     if (sessionStorage.getItem('name')) {
         memberNav.setAttribute('href', 'member_login.html');
         
-        greeting.textContent = `${sessionStorage.getItem('name')}`+'，您好！';
+        greeting.textContent = `${sessionStorage.getItem('name')}`+'您好~';
         
         logOutLink.textContent = '登出';
         
@@ -33,6 +33,19 @@
     }
     
 //};
+
+let hamburger = document.querySelector('#hamburger');
+let nav = document.querySelector('nav');
+
+
+hamburger.onclick = function () {
+    if (nav.className !== 'nav_active') {
+        nav.className = 'nav_active'
+    } else {
+        nav.className = 'nav_inactive'
+    }
+};
+
 
 
   

@@ -111,10 +111,6 @@ name.value = sessionStorage.getItem('name');
 let tel = document.querySelector('#member_tel');
 tel.value = sessionStorage.getItem('tel');
 
-let orderTime = document.querySelector('#order_date');
-let today;
-
-
 let orderForm = document.querySelector('#order_form');
 
 orderForm.addEventListener('submit', function (e) {
@@ -124,10 +120,7 @@ orderForm.addEventListener('submit', function (e) {
     } else if (localStorage.length = 0) {
         e.preventDefault();
         window.alert('訂購前，請先至滷品列表點選欲訂購之品項');
-    } else {
-        today = new Date();
-        orderTime.value =`${today.getFullYear()}\-${today.getMonth()+1}\-${today.getDate()}`;
-    }
+    } 
 });
 
 

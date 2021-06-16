@@ -111,6 +111,7 @@
 }
 
 .check_right {
+    padding-left : 30px;
     align-self: flex-start;
     font-size: 0.9rem;
 }
@@ -128,4 +129,59 @@
     align-self: flex-end;
     color: darkgray;
     font-size: 0.9rem;
+}
+
+
+
+@media (orientation: portrait) {
+
+    #form_box fieldset {
+        padding-left: 0px;
+        margin-top: 8vh;
+    }
+
+    .box__fieldset {
+        min-width: auto;
+        width: 100vw;
+        height: 400px;
+        padding: 0px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(45deg, var(--logo_color), white 15%, white 85%, var(--logo_color));
+    }
+
+    #legend_1 {
+        position: absolute;
+        top: -40px;
+        left: -10px;
+    }
+
+    #legend_2 {
+        position: absolute;
+        top: -40px;
+        left: 60px;
+    }
+
+    #legend_3 {
+        position: absolute;
+        top: -40px;
+        left: 130px;
+    }
+
+    #legend_4 {
+        position: absolute;
+        top: -40px;
+        left: 200px;
+    }
+
+}
+
+
+
+
+main {
+    min-height: 500px;
 }

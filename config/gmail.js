@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const config = {
     service: 'Gmail',
     auth: {
-        user: '',
+        user: '@gmail.com',
         pass: ''
     }
 };

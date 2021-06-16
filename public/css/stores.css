@@ -40,5 +40,39 @@ main div section {
     height: 100%;
 }
 
+#map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
+
+
+@media (orientation: portrait) and (max-width: 500px) {
+
+    main div section {
+        max-width: 100%;
+        min-width: auto;
+        height: 250px;
+        flex: 0 1 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 20px;
+    }
+
+    #photo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        overflow: hidden;
+    }
+
+    #info h3, #info p {
+        margin: 0px;
+        font-size: 100%;
+    }
+
+}
 
