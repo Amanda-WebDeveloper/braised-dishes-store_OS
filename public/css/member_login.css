@@ -5,7 +5,7 @@ main div {
     padding: 20px;
     position: relative;
     margin: 0vw 15vw;
-    background-image: linear-gradient(45deg, var(--logo_color), white 15%, white 85%, var(--logo_color));
+    background-color: white;
     display: flex;
     flex-direction: row;
     align-items: center;

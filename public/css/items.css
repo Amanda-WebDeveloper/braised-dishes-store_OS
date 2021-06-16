@@ -2,7 +2,7 @@
     width: 100%;
     display: inline-flex;
     align-content: center;
-    background-image: linear-gradient(45deg, var(--logo_color), white 15%, white 85%, var(--logo_color));
+    background-color: white;
     margin-top: 3vw; 
 }
 
