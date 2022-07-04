@@ -116,25 +116,55 @@
     font-size: 0.9rem;
 }
 
-.box__fieldset div button {
-    margin: 15px;
-    width: 120px;
-    height: 25px;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-}
-
 .box__fieldset div a {
     align-self: flex-end;
     color: darkgray;
     font-size: 0.9rem;
 }
 
+button {
+    margin: 15px;
+    width: 120px;
+    height: 25px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    display: block;
+}
+
+#verification_background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,150,150,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+#verification_box {
+    width: 60vw;
+    height: 60vw;
+    background-color: rgb(255,150,150);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+.unactive_verification {
+    display: none !important;
+}
 
 
 @media (orientation: portrait) {
-
     #form_box fieldset {
         padding-left: 0px;
         margin-top: 8vh;
@@ -177,7 +207,10 @@
         left: 200px;
     }
 
-}
+    #verification_box {
+        width: 70vw;
+        height: 70vw;
+    }
 
 
 

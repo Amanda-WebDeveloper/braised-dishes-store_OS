@@ -146,11 +146,73 @@ passwordAgain.addEventListener('input', function () {
     }
 });
 
+//會員註冊頁面初始化
+const verification = document.querySelector('#verification_background');
+
+window.onload = function () {
+    verification.classList.add('unactive_verification');
+};
+
+const emailCheckBtn = document.querySelector('#email_check');
+const emailInput = document.querySelector('#email');
+const codeAns = document.querySelector('#code_ans');
+
+let email;
+
+emailCheckBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    email = emailInput.value;
+    sendEmailCheck(email);
+
+    verification.classList.remove('unactive_verification');
+});
+
+function sendEmailCheck(email) {
+    const XHR = new XMLHttpRequest();
+    const FD = new FormData();
+    FD.append('email', email);
+
+    XHR.open('POST', '/email_check', true);
+    XHR.responseType = 'json';
+
+    XHR.addEventListener('error', function () {
+        window.alert('會員驗證信寄送失敗');
+        console.log('The sending of verification mail is failed.');
+    });
+    XHR.addEventListener('load', function () {
+        if (XHR.response) {
+            codeAns.value = XHR.response;
+
+            window.alert('會員驗證碼已寄送至您註冊的email信箱，若關閉驗證畫面請重新註冊');
+            console.log('The sending of verification mail is successed.');
+        } else {
+            window.alert('會員驗證系統錯誤');
+            console.log('There is something wrong in verification.');
+        }
+    });
+
+    XHR.send(FD);
+}
+
+const registerBtn = document.querySelector('#register_btn');
+const codeInput = document.querySelector('#code_input');
+
+registerBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (codeInput.value === codeAns.value) {
+        registerForm.submit();
+    } else {
+        window.alert('驗證碼輸入錯誤');
+    }
+});
+
 
 
 
 //清除上一頁表單資料
 window.onunload = function () {
+
     let loginForm = document.querySelector('#login_form');
     let registerForm = document.querySelector('#register_form');
     loginForm.reset();
@@ -159,31 +221,5 @@ window.onunload = function () {
 
 
 
-/* Functions */
-function memberAuthentication (form, path) {
-    const XHR = new XMLHttpRequest();
-    const FD = new FormData(form);
 
-    XHR.open('POST', path, true);
-    XHR.responseType = 'text';
-
-    XHR.addEventListener('error', function () {
-        window.alert('會員驗證失敗');
-        console.log('The data sending is failed.');
-    });
-    XHR.addEventListener('load', function () {
-        if (XHR.response) {
-            window.alert(XHR.response);
-            console.log('Data sent and response loaded.');
-            window.location.href = "/member.html";
-                
-        } else {
-            window.alert('會員驗證失敗');
-            form.reset();
-        }
-            
-    });
-
-    XHR.send(FD);
-}
 

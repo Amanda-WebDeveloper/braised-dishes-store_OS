@@ -33,7 +33,7 @@
 
         <h2>滷客中心</h2><hr>
         <div id="form_box">
-            <form action="" method="" id="login_form">
+            <form id="login_form">
                 <fieldset>
                     <div class="box__fieldset active_fieldset" id="fieldset_1">
                         <legend id="legend_1">會員登入</legend>
@@ -133,28 +133,41 @@
                             </p>
                             <label for="getting_ad" class="check_right">
                                 <input type="checkbox" id="getting_ad" name="getting_ad" value="1" required>
-                                我願意收到滷味優惠資訊
+                                我願意收到O滷味優惠資訊
                             </label><br>
                             <label for="privacy"  class="check_right">
                                 <input type="checkbox" id="privacy" name="privacy" value="1" required>
                                 我已詳細閱讀並同意<a href="/privacy.html" target="_blank">隱私權政策</a>
                             </label><br>
-                            <button type="submit">提交</button>
+                            <button type="button" id="email_check">提交</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
         </div>
+
+        <div id="verification_background">
+            <div id="verification_box">
+                <input type="hidden" id="code_ans" name="code_ans" value=""/>
+
+                <label for="code">請輸入email驗證碼</label>
+                <input type="number" id="code_input" name="code_input" required />
+
+                <button type="button" id="register_btn">確認</button>
+            </div>
+        </div>
+        
+
     </main>
 
     <footer>
         <div>
             <p>
                 營業時間:上午11:00至下午18:00<br>
-                地址：台北市中正區八德路1段82巷12號<br>
-                電話：0980-010-692<br>
+                地址：OOO<br>
+                電話：0900000000<br>
             </p>
-            <p>Copyright © 滷味. All Rights Reserved.</p>
+            <p>Copyright © O滷味. All Rights Reserved.</p>
         </div>
     </footer>
 

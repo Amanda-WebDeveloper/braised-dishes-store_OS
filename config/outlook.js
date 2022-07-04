@@ -1,10 +1,13 @@
 const nodemailer = require('nodemailer');
 
 const config = {
-    service: 'Gmail',
+    host: 'smtp-mail.outlook.com',
+    port: '587',
+    secure: false,
+    secureConnection: true,
     auth: {
-        user: '@gmail.com',
-        pass: ''
+        user: 'O@hotmail.com',
+        pass: 'O'
     }
 };
 
