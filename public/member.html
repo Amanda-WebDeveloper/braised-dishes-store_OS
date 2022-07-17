@@ -147,14 +147,15 @@
         </div>
 
         <div id="verification_background">
-            <div id="verification_box">
-                <input type="hidden" id="code_ans" name="code_ans" value=""/>
+            <form id="verification_box">
+                <input type="hidden" id="code_register" name="code_register" value="" />
+                <input type="hidden" id="code_pwd_reset" name="code_pwd_reset" value="" />
 
-                <label for="code">請輸入email驗證碼</label>
+                <label for="code_input">請輸入email驗證碼</label>
                 <input type="number" id="code_input" name="code_input" required />
 
                 <button type="button" id="register_btn">確認</button>
-            </div>
+            </form>
         </div>
         
 

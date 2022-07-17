@@ -126,41 +126,27 @@ router.post('/login_check', function (req, res) {
     let accountEntered = req.body.account;
     let passwordEntered = req.body.password;
 
-    console.log(`帳號${accountEntered}，密碼${passwordEntered}`);
-
     connPool.getConnection((err, connection) => {
         if (err) {
             console.log('The connPool is failed to getConnection.');
             throw err;
         } else {
-            connection.query('SELECT * FROM member_list', function (err, rows, fields) {
+            connection.query('SELECT * FROM member_list WHERE account=? AND password=?', [accountEntered, passwordEntered], function (err, row, fields) {
                 if (err) {
-                    console.log('There is some error in SELECT query.');
                     throw err;
+                    console.log(`Member ${accountEntered} failed to log in.`);
+                    res.end();
+                    
                 } else {
-                    for (let i = 0; i < rows.length; i++) {
-                        let row = rows[i];
-                        if (accountEntered === row.account && passwordEntered === row.password) {
-                            console.log(`Member ${accountEntered} logged in.`);
-                            
-                            let tokens = {
-                                "name": row.name,
-                                "birthday": `${row.birthday.getFullYear()}\-${row.birthday.getMonth()+1}\-${row.birthday.getDate()}`,
-                                "tel": row.account
-                            };
-        
-                            return res.json(tokens);
-                            
-                            
-                        } else {
-                            console.log(`Member ${accountEntered} failed to log in.`);
-                            return res.end();
-                        }
-                    }
+                    let tokens = {
+                        "name": row[0].name,
+                        "birthday": `${row[0].birthday.getFullYear()}\-${row[0].birthday.getMonth() + 1}\-${row[0].birthday.getDate()}`,
+                        "tel": row[0].account
+                    };
+
+                    res.json(tokens);
                 }
-                connection.release();
-            });
-            
+            }); 
         }
     });
 });
@@ -170,93 +156,72 @@ router.post('/login_check', function (req, res) {
 router.post('/forgot_password', function (req, res, next) {
     let accountEntered = req.body.account;
     let emailEntered = req.body.email;
+    let code = Math.floor(Math.random() * 9999);
     
     connPool.getConnection((err, connection) => {
         if (err) {
             console.log('The connPool is failed to getConnection.');
             throw err;
         } else {
-            connection.query('SELECT * FROM member_list', function (err, rows, fields) {
+            connection.query('SELECT * FROM member_list WHERE account=? AND email=?', [accountEntered, emailEntered], function (err, row, fields) {
                 if (err) {
-                    console.log('There is some error in SELECT query.');
                     throw err;
+                    console.log(`Member ${accountEntered} forgot his password and do not pass the check.`);
+                    res.end();
                 } else {
-                    for (i = 0; i < rows.length; i++) {
-                        let row = rows[i];
-                        if (accountEntered === row.account && emailEntered === row.email) {
-                            console.log(`Member ${accountEntered} forgot his password and passed the check.`);
-                            
-                            connection.query('UPDATE member_list SET passwordReset=? WHERE account=?', [1, accountEntered], function (err, results, fields) {
-                                if (err) {
-                                    console.log('There is some error in UPDATE query.');
-                                    throw err;
-                                } else {
-                                    console.log(`Member ${accountEntered} gets the password-reseting availability.`);
-                                }
-                            });
-                            
-                            setTimeout(function () {
-                                connection.query('UPDATE member_list SET passwordReset=? WHERE account=?', [0, accountEntered], function (err, results, fields) {
-                                    if (err) {
-                                        console.log('There is some error in UPDATE query.');
-                                        throw err;
-                                    } else {
-                                        console.log(`Member ${accountEntered} loses the password-reseting availability.`);
-                                    }
-                                });
-                                console.log('Connection released.');
-                            }, 600000);
-                            
-                            next('route');
-                            
+                    console.log(`Member ${accountEntered} forgot his password and passed the check.`);
+
+                    connection.query('UPDATE member_list SET passwordReset=? WHERE account=?', [code, accountEntered], function (err, results, fields) {
+                        if (err) {
+                            console.log('There is some error in UPDATE query of password-reseting availability.');
+                            throw err;
                         } else {
-                            console.log(`Member ${accountEntered} forgot his password and do not pass the check.`);
-                            res.end();
+                            console.log(`Member ${accountEntered} got the password-reseting availability.`);
+                            
                         }
-                    } 
+                    });
+
+                    setTimeout(function () {
+                        connection.query('UPDATE member_list SET passwordReset=? WHERE account=?', [0, accountEntered], function (err, results, fields) {
+                            if (err) {
+                                console.log('There is some error in UPDATE query of password-reseting disavailability.');
+                                throw err;
+                            } else {
+                                console.log(`Member ${accountEntered} loses the password-reseting availability.`);
+                            }
+                        });
+                    }, 600000);
+
+                    let options = {
+                        from: 'O滷味 <O@hotmail.com>',
+                        to: emailEntered,
+                        subject: 'O滷味會員密碼重設',
+                        html: '<p>親愛的滷客您好：</p><br><p>您的密碼重設驗證碼為' + code + '請在10分鐘內完成密碼重設，逾時請重新輸入會員資料，謝謝您！</p>'
+                    }
+                    sendEmail(options);
+
+                    let token = {
+                        "code": code,
+                        "account": accountEntered
+                    };
+
+                    console.log(`Member ${accountEntered} got the password-reseting code.`);
+
+                    res.json(token);
+
+                    connection.release();
                 }
-                connection.release();
             });
+
             
         }
     });
-       
-});
-
-router.post('/forgot_password', function (req, res, next) {
-    let accountEntered = req.body.account;
-    let emailEntered = req.body.email;
-    
-    let options = {
-        from: 'O滷味 <O@hotmail.com>',
-        to: emailEntered,
-        subject: 'O滷味會員密碼重設',
-        html: '<form action="http://localhost:3000/password_reset" method="post"><p>親愛的滷客您好：</p><br><p>請在10分鐘內點擊下方設定密碼按鈕，以完成密碼重設，謝謝您！</p><button type="submit" style="background-color: blue; color: white; width: 140px; line-height: 30px; font-size: 25px;">設定密碼</button></form>'
-    };
-                            
-    sendEmail(options);
-    
-    next();
-    
-}, function (req, res) {
-    console.log(`Memeber ${req.body.account} gets the token.`);
-    
-    let token = {
-        "account": req.body.account
-    };
-    
-    res.json(token);
-    
 });
                             
                             
 
 //密碼重設
 router.post('/password_reset', function (req, res, next) {
-    res.sendfile('./routes/password_reset.html');
-});
-
-router.post('/password_reset_submit', function (req, res, next) {
     let account = req.body.account;
     let password = req.body.password;
     
@@ -265,45 +230,28 @@ router.post('/password_reset_submit', function (req, res, next) {
             console.log('The connPool is failed to get connection.');
             throw err;
         } else {
-            connection.query('SELECT * FROM member_list', function (err, rows, fields) {
+            connection.query('SELECT * FROM member_list WHERE account=?', account, function (err, row, field) {
                 if (err) {
-                    console.log('There is some error in SELECT query.');
+                    console.log('There is some error in SELECT query of password resetting.');
                     throw err;
+                    res.end();
                 } else {
-                    for (i = 0; i < rows.length; i++) {
-                        let row = rows[i];
-                        if (row.passwordReset === 1 && row.account === account) {
-                            console.log(`Member ${account} is resetting his password.`);
-                            
-                            connection.query('UPDATE member_list SET password=?,passwordReset=? WHERE account=?', [password, 0,  account], function (err, row, field) {
-                                if (err) {
-                                    console.log('There is some error in UPDATE query.');
-                                    throw err;
-                                } else {
-                                    console.log(`Member ${account} reseted his password.`);
-                                    
-                                    res.sendfile('./routes/password_reset_success.html');
-                                }
-                            });
-
-                        } else if (row.passwordReset !== 1 && row.account === account) {
-                            console.log(`Member ${account} dosen't have the availability of password-reseting.`);
-                            
-                            res.send('Error.');
-                            
+                    connection.query('UPDATE member_list SET password=?,passwordReset=? WHERE account=?', [password, 0, account], function (err, row, field) {
+                        if (err) {
+                            throw err;
+                            console.log('There is some error in UPDATE query of password resetting.');
                         } else {
-                            console.log('Non-existent member.');
-                            
-                            res.send('Error.');
+                            console.log(`Member ${account} reseted his password.`);
+
+                            res.sendfile('./routes/password_reset_success.html');
+
+                            connection.release();
                         }
-                    };
+                    });
                 }
-                connection.release();
             });  
-            
         }
     });
-    
 });
 
 
@@ -318,44 +266,31 @@ router.post('/forgot_account', function (req, res, next) {
             console.log('The connPool is failed to getConnection.');
             throw err;
         } else {
-            connection.query('SELECT * FROM member_list', function (err, rows, fields) {
+            connection.query('SELECT * FROM member_list WHERE IDNumber=? AND email=?', [idEntered, emailEntered], function (err, row, fields) {
                 if (err) {
-                    console.log('There is some error in SELECT query.');
                     throw err;
+                    console.log(`Member ${emailEntered} forgot his account and do not pass the check.`);
+                    res.end();
                 } else {
-                    for (i = 0; i < rows.length; i++) {
-                        let row = rows[i];
-                        
-                        if (idEntered === row.IDNumber && emailEntered === row.email) {
-                            console.log(`Member ${emailEntered} forgot his account and passed the check.`);
-                            let account = row.account;
-                            let options = {
-                                from: 'O滷味 <O@hotmail.com>',
-                                to: emailEntered,
-                                subject: 'O滷味會員帳號提醒',
-                                html: 
-                                '<p>親愛的滷客您好：</p><br><p>您的會員帳號為 '+ account +' ，謝謝您！</p><br><a href="http://localhost:3000/member.html">O滷味會員登入</a>'
-                            };
-                            sendEmail(options);
+                    console.log(`Member ${emailEntered} forgot his account and passed the check.`);
+                    let account = row[0].account;
+                    let options = {
+                        from: 'O滷味 <O@hotmail.com>',
+                        to: emailEntered,
+                        subject: 'O滷味會員帳號提醒',
+                        html:
+                            '<p>親愛的滷客您好：</p><br><p>您的會員帳號為 ' + account + ' ，謝謝您！</p><br><a href="http://localhost:3000/member.html">O滷味會員登入</a>'
+                    };
+
+                    sendEmail(options);        
                             
-                            next('route');
-                            
-                        } else {
-                            console.log(`Member ${emailEntered} forgot his account and do not pass the check.`);
-                            
-                            res.end();
-                        }
-                    }
+                    res.redirect('/member');
                 }
                 connection.release();
             });
             
         }
     });
-});
-
-router.post('/forgot_account', function (req, res) {
-    res.redirect('/member');
 });
 
 
